@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Profile = () => {
+
     return (
         <ProfileTitle>
             <h1>Profile</h1>
