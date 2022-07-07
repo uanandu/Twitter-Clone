@@ -31,6 +31,7 @@ const Sidebar = () => {
                     <BookmarksIcon />
                     <span>Bookmarks</span>
                 </NavigationLink>
+                <MeowButton>Meow</MeowButton>
             </Navigation>
         
         </div>
@@ -55,7 +56,7 @@ const NavigationLink = styled(NavLink)`
     display: flex;
     align-items: center;    
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     
     &:hover {
         background-color: #f5f5f5;
@@ -90,6 +91,22 @@ const BookmarksIcon = styled(FiBookmark)`
     width: 30px;
     height: 30px;
     padding: 0 20px;
+`
+
+const MeowButton = styled.button`
+    font-size: medium;
+    font-weight: 800;
+    color: white;
+    background-color: hsl(258deg, 100%, 50%);
+    border-radius: 20px;
+    width: inherit;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: hsl(258deg, 75%, 50%);
+    }
 `
 
 export default Sidebar;
