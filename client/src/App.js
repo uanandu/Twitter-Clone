@@ -1,25 +1,55 @@
-import logo from './logo.svg';
+// import logo from '../src/logo.svg';
 import './App.css';
 
-function App() {
+
+// Imported for router functionality: Router, Switch, Route,
+// useParams to get the id from the url
+// Link is used to link to other pages (It's a react component)
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+  Link
+} from "react-router-dom";
+//==============================================================//
+
+// Import local pages
+import Homepage from './pages/Homepage';
+import Notifications from './pages/Notifications';
+import Bookmarks from './pages/Bookmarks';
+import Profile from './pages/Profile';
+import Tweet from './pages/Tweet';
+import Sidebar from './components/SIdebar';
+//==============================================================//
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <Sidebar/>
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route exact path="/notifications">
+            <Notifications />
+          </Route>          
+          <Route exact path="/bookmarks">
+            <Bookmarks />
+          </Route>          
+          <Route exact path="/tweet/:tweetId">
+            <Tweet />
+          </Route>          
+          <Route exact path="/profile/:profileId">
+            <Profile />
+          </Route>
+
+        </Switch>
+      </Router>
   );
 }
+
+
 
 export default App;
