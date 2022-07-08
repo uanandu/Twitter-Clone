@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CurrentUserProvider } from './components/CurrentUserContext';
+import { TweetProvider } from './components/TweetContext';
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 ReactDOM.render(
   <React.StrictMode>
       <CurrentUserProvider>
-          <App />
+          <TweetProvider>
+              <App />
+          </TweetProvider>
       </CurrentUserProvider>
   </React.StrictMode>,
   document.getElementById('root')
