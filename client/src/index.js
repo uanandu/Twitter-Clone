@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CurrentUserProvider } from './components/CurrentUserContext';
-import { TweetProvider } from './components/TweetContext';
+
+import { CurrentUserProvider } from './components/Contexts/CurrentUserContext';
+import { TweetProvider } from './components/Contexts/TweetContext';
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
+
 ReactDOM.render(
   <React.StrictMode>
       <CurrentUserProvider>
-          <TweetProvider>
-              <App />
-          </TweetProvider>
+            <TweetProvider>
+                <App />
+            </TweetProvider>
       </CurrentUserProvider>
   </React.StrictMode>,
   document.getElementById('root')

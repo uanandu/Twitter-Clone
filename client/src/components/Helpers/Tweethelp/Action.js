@@ -1,6 +1,7 @@
 import {useState} from "react";
 import styled from 'styled-components';
-import UnstyledButton from "./LikeButton/UnstyledButton";
+
+import UnstyledButton from "./UnstyledButton";
 
 const Action = ({ color, size, children, onClickFunc }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -24,6 +25,7 @@ const Wrapper = styled(UnstyledButton)`
   justify-content: center;
   align-items: center;
   outline: none;
+
   &:after {
     content: '';
     position: absolute;
@@ -35,6 +37,7 @@ const Wrapper = styled(UnstyledButton)`
     opacity: 0;
     background-color: ${p => p.circleColor};
   }
+
   &:focus:after,
   &:hover:after {
     opacity: 0.12;

@@ -1,18 +1,12 @@
 import styled from "styled-components"
 import {FiHome, FiUser, FiBell, FiBookmark} from 'react-icons/fi'
 import { NavLink } from "react-router-dom"
-import { useContext } from "react";
-
 import {ReactComponent as Logo} from '../assets/logo.svg'
-
-import {CurrentUserContext} from "../components/CurrentUserContext"
 
 const Sidebar = () => {
 
-    const {currentUserUpdate} = useContext(CurrentUserContext)
-
     return (
-        <div>
+        <>
             <Navigation>
                 <Logo/>
                 <NavigationLink exact to="/">
@@ -31,32 +25,40 @@ const Sidebar = () => {
                     <BookmarksIcon />
                     <span>Bookmarks</span>
                 </NavigationLink>
-                <MeowButton>Meow</MeowButton>
+                <MeowButton className="meow">Meow</MeowButton>
             </Navigation>
         
-        </div>
+        </>
     )
 }
 
-// styled Items
-
+// styled components
 const Navigation = styled.div`
     position: fixed;
     padding: 0 25px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-direction: column;
-    height: 500px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
+    width: 250px;
+    height: 100vh;
+    margin-top: 20px;
+    border-right: 1px solid lightgray;
+
+    @media (max-width: 900px) {
+        display: none;
+    }
+
 `
 const NavigationLink = styled(NavLink)`
+    font-family: 'Roboto', sans-serif;
     text-decoration: none;
+    font-weight: 800;
     color: black;
     display: flex;
     align-items: center;    
     padding: 10px;
     border-radius: 20px;
+    margin: 10px 0 10px 0;
     
     &:hover {
         background-color: #f5f5f5;
@@ -98,9 +100,9 @@ const MeowButton = styled.button`
     font-weight: 800;
     color: white;
     background-color: hsl(258deg, 100%, 50%);
-    border-radius: 20px;
+    border-radius: 25px;
     width: inherit;
-    height: 35px;
+    height: 45px;
     border: none;
     cursor: pointer;
 
