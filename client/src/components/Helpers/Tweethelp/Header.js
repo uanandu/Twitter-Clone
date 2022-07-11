@@ -36,11 +36,12 @@ const Header = ({ tweet }) => {
           <Name>
             <DisplayName 
             key={tweet.id}
-            // onClick={(e)=> {
-            //   handleUserProfile(e)
-            //   }
-            // }
-            to={`/${tweet.author.handle}/profile`}
+            onClick={(e)=> {
+              // e.preventDefault();
+              e.stopPropagation();              
+            }
+            }
+            to={`/profile/${tweet.author.handle}`}
             >
               {tweet.author.displayName}
             </DisplayName>
@@ -57,6 +58,7 @@ const Header = ({ tweet }) => {
 
 const Wrapper = styled.header`
   display: flex;
+  margin: 10px;
 `;
 
 const Retweet = styled.div`

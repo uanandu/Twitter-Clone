@@ -36,9 +36,11 @@ const Profile = () => {
 
   const history = useHistory();
 
-  const handleShowTweet = (tweet) => {
+  const handleShowTweet = (e, tweet) => {
+    e.preventDefault();
+    e.stopPropagation();
     history.push({
-      pathname: `/tweet/${tweet}`,
+      pathname: `/tweet/${tweet.id}`,
     })
   }
 
@@ -111,7 +113,7 @@ const Profile = () => {
                     onClick={(e)=> {
                       e.preventDefault();
                       e.stopPropagation();
-                      handleShowTweet(tweet.id)}
+                      handleShowTweet(tweet)}
                     }
                     
                     >

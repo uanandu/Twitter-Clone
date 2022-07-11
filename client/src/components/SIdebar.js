@@ -13,7 +13,7 @@ const Sidebar = () => {
                     <HomeIcon />
                     <span>Home</span>
                 </NavigationLink>
-                <NavigationLink exact to="/profile">
+                <NavigationLink exact to="/profile/me">
                     <ProfileIcon />
                     <span>Profile</span>
                 </NavigationLink>

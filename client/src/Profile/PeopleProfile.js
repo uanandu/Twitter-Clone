@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react"; // for using state, context and effect
-import { useLocation, NavLink, useHistory } from "react-router-dom"; // for using location of iDs
+import { useLocation, NavLink, useHistory, useParams } from "react-router-dom"; // for using location of iDs
 import styled from "styled-components"; // for using styled components
 import moment from "moment"; // for using moment.js
 
@@ -19,8 +19,10 @@ import { ErrorHandling } from "../components/Helpers/ErrorHandling";
 
 export const PeopleProfile = () => {
 
+  const {handle} = useParams();
+
   // get followers and following from the context
-  const { status, currentFollowers, followerStatus } =
+  const { status,currentUser, currentFollowers, followerStatus } =
     useContext(CurrentUserContext);
 
   //states for the profile
@@ -32,24 +34,24 @@ export const PeopleProfile = () => {
   const [peopleProfileFeed, setPeopleProfileFeed] = useState({});
   const [profileFeedStatus, setProfileFeedStatus] = useState("loading");
 
-  const location = useLocation();
+  // const location = useLocation();
   //   const history = useHistory();
   const history = useHistory();
 
-  const handleViewTweet = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // history.push({
-    //   pathname: `/tweet/${tweetId}`,
-    // });
-  }
+  // const handleViewTweet = (e) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   // history.push({
+  //   //   pathname: `/tweet/${tweetId}`,
+  //   // });
+  // }
 
   //for followers
   let isFollowingMe = false;
 
   // fetch the profile data for the specific user  by handle from profile
   useEffect(() => {
-    let handle = location.state.profileHandle;
+    // let handle = location.state.profileHandle;
     fetch(`/api/${handle}/profile`)
       .then((res) => res.json())
       .then((data) => {
@@ -61,14 +63,14 @@ export const PeopleProfile = () => {
         setProfileStatus("error");
       });
     return setProfileStatus("loading");
-  }, []);
+  }, [useParams]);
 
   // fetch the feed data for the specific user by handle from profile
   useEffect(() => {
-    let handle = location.state.profileHandle;
+    // let handle = location.state.profileHandle;
     // console.log(handle)
 
-    fetch(`/api/${handle}/feed`)
+    fetch(`/api/${handle==="me"? currentUser.profile.handle : handle}/feed`)
       .then((res) => res.json()) 
       .then((data) => {
         // console.log("feed data", data.feed);
@@ -79,7 +81,7 @@ export const PeopleProfile = () => {
         setProfileFeedStatus("error");
       });
     return setProfileFeedStatus("loading");
-  }, []);
+  }, [useParams]);
 
   //   check if we have the data set
   // console.log("profile feed", peopleProfileFeed);
@@ -113,15 +115,6 @@ export const PeopleProfile = () => {
   // to make sure that the code doesnt break
   if (!peopleProfile.profile) {
     return <LoadingSpinner />;
-  }
-
-  const handleShowTweet = ({e, tweet}) => {
-    e.preventDefault();
-    e.stopPropogation();
-
-    history.push({
-      pathname: `/tweet/${tweet.id}`,
-    });
   }
 
   return (
@@ -187,7 +180,10 @@ export const PeopleProfile = () => {
                   return (
                     <TweetContainerHere tabIndex="0"
                       key={tweet.id}
-                      onClick={(e)=>handleShowTweet(e, tweet)}
+                      onClick={(e)=>
+                        e.stopPropagation()
+                        }
+                        to={`/tweet/${tweet.id}`}
                     >
                       <Header tweet={tweet} />
                       <Content>
@@ -348,18 +344,7 @@ background-color: white;
   padding: 10px;
   border: none;
   cursor: pointer;
-
-  &:hover {
-    color: ${COLORS.primary};
-    border-bottom: 2px solid ${COLORS.primary};
-    cursor: pointer;
-  }
-
-  &:focus {
-    outline: none;
-    color: ${COLORS.primary};
-    border-bottom: 2px solid ${COLORS.primary};
-  }
+  border-bottom: 2px solid ${COLORS.primary};
 `;
 const MediaHere = styled.button`
   background-color: white;
@@ -388,7 +373,11 @@ const LikesHere = styled.button`
   }
 `;
 
-const TweetContainerHere = styled.div`
+const TweetContainerHere = styled(NavLink)`
+  padding: 10px;
+  margin: 10px;
+  text-decoration: none;
+  color: black;
   padding: 10px;
   cursor: pointer;
 `;
@@ -397,7 +386,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 10px 0;
+  margin: 10px;
 `;
 
 const Divider = styled.div`

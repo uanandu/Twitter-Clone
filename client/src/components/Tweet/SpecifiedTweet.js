@@ -1,4 +1,4 @@
-import { useLocation, useHistory, NavLink } from "react-router-dom"; // for locating a tweet
+import { useLocation, useHistory, NavLink, useParams } from "react-router-dom"; // for locating a tweet
 import { useState, useEffect, useContext } from "react"; // for manipulating the tweet
 
 import styled from "styled-components"; // for styling
@@ -16,7 +16,9 @@ import { LoadingSpinner } from "../Helpers/LoadingSpinner"; // for the loading s
 import { ErrorHandling } from "../Helpers/ErrorHandling"; // ErrorHandling
 
 const SpecifiedTweet = () => {
-  
+
+  const {tweetId} = useParams();
+
   const { status } = useContext(CurrentUserContext); // we deconstruct the context
 
   // states
@@ -31,11 +33,11 @@ const SpecifiedTweet = () => {
 
   // check to see the locatio with click on ID
   // console.log("check location", location.state.tweetID);
-  let tweetID = location.state.tweetID; //get the profileHandle data from history.push used
+  // let tweetID = location.state.tweetID; //get the profileHandle data from history.push used
 
   // fetch the tweet info based on the tweetID where we click
   useEffect(() => {
-    fetch(`/api/tweet/${tweetID}`)
+    fetch(`/api/tweet/${tweetId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("received tweet info", data);
@@ -53,8 +55,8 @@ const SpecifiedTweet = () => {
     let handle = tweetInfo.tweet.author.handle;
 
     history.push({
-      pathname: `/${handle}/profile`,
-      state: { profileHandle: handle },
+      pathname: `/profile/${handle}`,
+      // state: { profileHandle: handle },
     });
   };
 
@@ -97,7 +99,7 @@ const SpecifiedTweet = () => {
             )}{" "}
             . Critter Web App
           </TweetTime>
-          <ActionBar tweetID={tweetID} />
+          <ActionBar tweetID={tweetId} />
         </Wrapper>
       </>
     );
