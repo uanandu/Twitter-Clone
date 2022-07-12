@@ -47,9 +47,13 @@ export const UserTweet = () => {
     }
   };
 
+  // Clear input field
+  const handleClear = () => {
+    document.getElementById("input-tweet").value = "";
+    setText("");
+  }
   // event for submit
   const handleSubmit = () => {
-    setText("");
     //meow has been submitted and the text is inputText
     if (text.length > 0) {
       fetch("/api/tweet", {
@@ -63,11 +67,11 @@ export const UserTweet = () => {
         .then((data) => {
           // received tweet post answer
           setNewTweetStatus(!newtweetStatus); //changing this state in order to notify CurrentUserContext.js for rerendering using useEffect
-          // setText("");
+          setText("");
           setCharacterCount(280);
           setCharacterColor("gray");
           setDisabled(false);
-
+          handleClear();
         });
     } else {
       alert("No tweets here!");
@@ -76,13 +80,15 @@ export const UserTweet = () => {
 
   if (status === "idle") {
     return (
-      <TweetWrapper tabIndex="0">
+      <TweetWrapper tabIndex="0" aria-label="Tweet here" id="form-element">
         <InputSection>
           <Avatar src={currentUser.profile.avatarSrc}></Avatar>
           <InputTweet
             placeholder="What's happening?"
             onChange={(e) => handleTextChange(e)}
             autoFocus
+            id="input-tweet"
+            value={text}
           />
         </InputSection>
         <SubmitSection>

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react"; // for using state, context and effect
-import { useLocation, NavLink, useHistory, useParams } from "react-router-dom"; // for using location of iDs
+import { NavLink, useParams } from "react-router-dom"; // for using location of iDs
 import styled from "styled-components"; // for using styled components
 import moment from "moment"; // for using moment.js
 
@@ -33,18 +33,6 @@ export const PeopleProfile = () => {
   //2) for getting the feed
   const [peopleProfileFeed, setPeopleProfileFeed] = useState({});
   const [profileFeedStatus, setProfileFeedStatus] = useState("loading");
-
-  // const location = useLocation();
-  //   const history = useHistory();
-  const history = useHistory();
-
-  // const handleViewTweet = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   // history.push({
-  //   //   pathname: `/tweet/${tweetId}`,
-  //   // });
-  // }
 
   //for followers
   let isFollowingMe = false;

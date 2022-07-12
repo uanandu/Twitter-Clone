@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Homepage } from "./Homefeed/Homepage";
 import Notifications from "./Notifications/Notifications";
 import Bookmarks from "./Bookmarks/Bookmarks";
-import Profile from "./Profile/Profile";
 import { PeopleProfile } from "./Profile/PeopleProfile";
 import SpecifiedTweet from "./components/Tweet/SpecifiedTweet";
 import Sidebar from "./components/SIdebar";

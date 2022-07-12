@@ -1,15 +1,10 @@
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
 import { AiOutlineRetweet } from "react-icons/ai";
 
 const Header = ({ tweet }) => {
-  console.log("this is inside header", tweet);
-
-  let handle = tweet.author.handle;
-
-  const history = useHistory();
+  // console.log("this is inside header", tweet);
 
   // const handleUserProfile = (e) => {
   //   e.preventDefault();
