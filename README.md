@@ -1,5 +1,7 @@
 # Twitter project
 
+Description: Twitter clone
+
 ## Initial setup
 
 ### The Server
